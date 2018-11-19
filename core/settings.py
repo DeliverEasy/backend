@@ -122,6 +122,8 @@ CORS_ORIGIN_WHITELIST = (
     'localhost:3000',
 )
 
+AUTH_USER_MODEL = "users.DeliverUser" 
+
 # default JWT response handler
 JWT_AUTH = {
     'JWT_RESPONSE_PAYLOAD_HANDLER': 'core.utils.my_jwt_response_handler'
