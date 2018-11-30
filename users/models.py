@@ -3,6 +3,8 @@ from django.contrib.auth.models import User
 
 class Product(models.Model):
 
+    lote = models.OneToManyField(Lote)
+
 
     name = models.CharField(max_length=40, null=False)
     TYPES_CHOICES = (
@@ -13,6 +15,8 @@ class Product(models.Model):
         ("C", "Clothing")
 
     )
+
+
     type = models.CharField(
         max_length=40,
         choices=TYPES_CHOICES,
@@ -40,23 +44,24 @@ class Sale(models.Model):
     total = models.DecimalField(decimal_places=2, max_digits=7, verbose_name='Total de la venta')
 
 
+
     def __str__(self):
         return '{}'.format(self.id)
 
 
-    class DetailSales(models.Model):
+class DetailSales(models.Model):
 
 
         Product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name='Producto')
-    cantidad = models.IntegerField(verbose_name='Cantidad')
-    sale = models.ForeignKey(Sales, on_delete=models.CASCADE, verbose_name='Sale')
+        cantidad = models.IntegerField(verbose_name='Cantidad')
+        sales = models.ForeignKey(Sale, on_delete=models.CASCADE, verbose_name='Sale')
 
 
     def __str__(self):
         return '{} - {}'.format(self.sale, self.producto)
 
 
-    class CreateSales(CreateView):
+class CreateSales(CreateView):
 
 
         Model = DetailSales
@@ -66,8 +71,8 @@ class Sale(models.Model):
         success_url = reverse_lazy('sale:sales_listar')
 
 
-    class UpdateSales(object):
-        pass
+class UpdateSales(object):
+    pass
 
 
     def get_context_data(self, **kwargs):
@@ -96,6 +101,21 @@ class Sale(models.Model):
             return HttpResponseRedirect(self.get_success_url())
         else:
             return HttpResponseRedirect(self.get_success_url())
+
+class Lote(models.Model):
+
+        valor = models.IntegerField
+        cantidad = models.IntegerField
+        peso = models.IntegerField
+        tipo = models.TextField(max_length=100)
+        id = models.ForeignKey()
+
+
+    def __unicode__(self):
+        return self.name
+
+
+
 
 
 
