@@ -28,7 +28,7 @@ class Product(models.Model):
 
 
 
-class xxx(models.Model):
+class order(models.Model):
 
     user = models.OneToManyField(User, null=False)
     product = models.ForeignKey(Product, null=False)
@@ -39,8 +39,8 @@ class xxx(models.Model):
 class Sale(models.Model):
 
 
-    fecha = models.DateField(auto_now_add=True)
-    descripion = models.CharField(max_length=300, blank=True, verbose_name='Detalle del pedido')
+    date = models.DateField(auto_now_add=True)
+    description = models.CharField(max_length=300, blank=True, verbose_name='Detalle del pedido')
     total = models.DecimalField(decimal_places=2, max_digits=7, verbose_name='Total de la venta')
 
 
@@ -90,9 +90,9 @@ class UpdateSales(object):
 
     def post(self, request, *args, **kwargs):
         self.object = self.get_object
-        id_detale = kwargs['pk']
-        detalle = self.model.objects.get(id=id_detale)
-        venta = self.second_model.objects.get(id=detalle.venta_id)
+        id_detail = kwargs['pk']
+        detail = self.model.objects.get(id=id_detale)
+        sale = self.second_model.objects.get(id=detalle.venta_id)
         form = self.form_class(request.POST, instance=detalle)
         form2 = self.second_form_class(request.POST, instance=venta)
         if form.is_valid() and form2.is_valid():
@@ -104,10 +104,10 @@ class UpdateSales(object):
 
 class Lote(models.Model):
 
-        valor = models.IntegerField
-        cantidad = models.IntegerField
-        peso = models.IntegerField
-        tipo = models.TextField(max_length=100)
+        value = models.IntegerField
+        quantity = models.IntegerField
+        weight = models.IntegerField
+        type = models.TextField(max_length=100, help_text="introduzca el tipo de producto que se pondra en el lote")
         id = models.ForeignKey()
 
 
