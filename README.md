@@ -4,7 +4,7 @@ Seccion de backend del proyecto "DeliverEasy"
 
 ## Getting Started
 
-### Prerquisitos
+### Prerequisitos
 
 #### Paquetes
 
@@ -16,6 +16,7 @@ Seccion de backend del proyecto "DeliverEasy"
 | djangorestframework-jwt | 1.11.0 |
 | pkg-resources | 0.0.0 |
 | PyJWT | 1.6.4 |
+| Pillow | 5.3.0 |
 | pytz | - |
 
 ### Instalacion
