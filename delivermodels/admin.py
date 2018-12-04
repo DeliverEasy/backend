@@ -1,6 +1,6 @@
 from django.contrib import admin
-from delivermodels.models import Product, Batch, Post, Comment
+from delivermodels.models import Post, Question, Answer
 
 # Register your models here.
 
-admin.site.register((Product, Batch, Post, Comment))
+admin.site.register((Post, Question, Answer))
