@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework_jwt.views import obtain_jwt_token, verify_jwt_token
-from delivermodels.views import post_detail, save_post
+from delivermodels.views import post_detail, save_post, PostViewSet
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -24,5 +24,6 @@ urlpatterns = [
     path('token-verify/', verify_jwt_token),
     path('users/', include('users.urls')),
     path('post-detail/<int:id>', post_detail),
-    path('save_post/', save_post)
+    path('save_post/', save_post),
+    path('post/list/', PostViewSet.as_view({'get': 'list'}))
 ]
