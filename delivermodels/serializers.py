@@ -19,3 +19,21 @@ class PostSerializer(serializers.HyperlinkedModelSerializer):
             'title',
             'image_url',
         )
+
+
+class PostDetailSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Post
+        fields = (
+            'id',
+            'user',
+            'title',
+            'description',
+            'product_name',
+            'product_type',
+            'quantity',
+            'stock',
+            'product_description',
+            'brand',
+            'image_url',
+        )
