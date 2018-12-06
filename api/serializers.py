@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from rest_framework_jwt.settings import api_settings
-from .models import DeliverUser
-
+from users.models import DeliverUser
+from delivermodels.models import Post
 
 class UserSerializer(serializers.ModelSerializer):
 
@@ -34,3 +34,32 @@ class UserSerializerWithToken(serializers.ModelSerializer):
     class Meta:
         model = DeliverUser
         fields = ('token', 'username', 'password')
+
+
+class PostSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Post
+        fields = (
+            'id',
+            'title',
+            'image_url',
+            'stock'
+        )
+
+
+class PostDetailSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Post
+        fields = (
+            'id',
+            'user',
+            'title',
+            'description',
+            'product_name',
+            'product_type',
+            'quantity',
+            'stock',
+            'product_description',
+            'brand',
+            'image_url',
+        )
