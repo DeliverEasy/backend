@@ -1,12 +1,12 @@
 from django.shortcuts import render
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.models import User
 from rest_framework import permissions, status, viewsets
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from .serializers import UserSerializer, UserSerializerWithToken, PostSerializer, PostDetailSerializer
-from delivermodels.models import Post
+from delivermodels.models import Post, DeliverUser
 
 # Create your views here.
 
@@ -44,19 +44,30 @@ def post_detail(request, id):
 
 @api_view(['POST'])
 def save_post(request):
-    if request.POST:
-        user = request.POST.get('user', None)
-        batch = request.POST.get('batch', None)
-        description = request.POST.get('description', None)
-        image_url = request.POST.get('image_url', None)
+    user = DeliverUser.objects.get(id=request.user.id)
+    product_name = request.POST.get('product_name')
+    product_description = request.POST.get('product_description')
+    title = request.POST.get('title')
+    product_type = request.POST.get('product_type')
+    brand = request.POST.get('brand')
+    description = request.POST.get('description')
+    image_url = request.POST.get('image_url')
+    quantity = request.POST.get('quantity')
+    stock = request.POST.get('stock')
 
-        newPost = Post()
-        newPost.user = user
-        newPost.batch = batch
-        newPost.description = description
-        newPost.image_url = image_url
-        newPost.save()
-    return HttpResponse('')
+    newPost = Post()
+    newPost.user = user
+    newPost.product_name = product_name
+    newPost.product_description = product_description
+    newPost.title = title
+    newPost.product_type = product_type
+    newPost.brand = brand
+    newPost.description = description
+    newPost.image_url = image_url
+    newPost.quantity = quantity
+    newPost.stock = stock
+    newPost.save()
+    return HttpResponse(status=201)
 
 
 class PostViewSet(viewsets.ModelViewSet):
