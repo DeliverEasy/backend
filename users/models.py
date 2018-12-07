@@ -54,26 +54,26 @@ class Mayorista(models.Model):
     user = models.OneToOneField(
         DeliverUser, on_delete=models.CASCADE, primary_key=True, related_name="DeliverUser")
     CUIT = models.CharField(max_length=11,
-                            null=False, validators=[validate_CUIT])
-    registered_name = models.CharField(max_length=25, null=False)
-    CBU = models.CharField(max_length=22, null=True)
-    tax_condition = models.IntegerField(choices=TAX_CONDITION_CHOICES)
+                            null=False, validators=[validate_CUIT], blank=False)
+    registered_name = models.CharField(max_length=25, null=False, blank=True)
+    CBU = models.CharField(max_length=22, null=True, blank=True)
+    tax_condition = models.IntegerField(choices=TAX_CONDITION_CHOICES, blank=True)
 
 
 
 class Minorista(models.Model):
     user = models.OneToOneField(
         DeliverUser, on_delete=models.CASCADE, primary_key=True)
-    Tipo_Comercio = models.CharFiel(max_length=50, null=False)
-    CUIT = models.IntegerField(null=True)
-    registered_name = models.CharField(max_length=25, null=False)
+    Tipo_Comercio = models.CharFiel(max_length=50, null=False, blank=True)
+    CUIT = models.IntegerField(null=True, blank=True)
+    registered_name = models.CharField(max_length=25, null=False, blank=True)
 
 
 class Empleado(models.Model):
     user = models.OneToOneField(
         DeliverUser, on_delete=models.CASCADE, primary_key=True)
-    Sueldo = models.IntegerField(max_length=5)
-    Nombre = models.CharField(max_length=50)
-    Apellido = models.CharField(max_length=50)
-    Numero_de_legajo = models.ManyToManyField(Minorista, Mayorista)
-    Telefono = models.CharField(max_length=10)
+    Sueldo = models.IntegerField(max_length=5, blank=True)
+    Nombre = models.CharField(max_length=50, blank=True)
+    Apellido = models.CharField(max_length=50, blank=True)
+    Numero_de_legajo = models.ManyToManyField(Minorista, Mayorista, blank=False)
+    Telefono = models.CharField(max_length=10, blank=True)

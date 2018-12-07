@@ -22,17 +22,17 @@ class Post(models.Model):
     user = models.ForeignKey(DeliverUser, related_name="my_posts", on_delete=models.CASCADE)
     description = models.CharField(max_length=144, blank=True, null=True)
     product_description = models.CharField(max_length=144, blank=True, null=True)
-    image_url = models.URLField(null=True)
-    title = models.CharField(max_length=50, blank=False)
-    product_type = models.CharField(max_length=20, choices=TYPES)
-    brand = models.CharField(max_length=20)
-    quantity = models.PositiveIntegerField(default=0)
-    stock = models.PositiveIntegerField(default=0)
+    image_url = models.URLField(null=True, blank=True)
+    title = models.CharField(max_length=50, blank=True)
+    product_type = models.CharField(max_length=20, choices=TYPES, blank=True)
+    brand = models.CharField(max_length=20, blank=True)
+    quantity = models.PositiveIntegerField(default=0, blank=True)
+    stock = models.PositiveIntegerField(default=0, blank=True)
 
 
 class Question(models.Model):
     user = models.ForeignKey(DeliverUser, on_delete=models.CASCADE)
-    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, null=True, blank=True)
     content = models.CharField(max_length=128, blank=False, null=False)
 
 
