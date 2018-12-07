@@ -9,14 +9,13 @@ class Post(models.Model):
     TYPES = {
         ('Verduras', 'VERDURAS'),
         ('Frutas', 'FRUTAS'),
-        ('Electrondomesticos', 'ELECTRODOMESTICOS'),
+        ('Electrodomesticos', 'ELECTRODOMESTICOS'),
         ('Bebidas', 'BEBIDAS'),
         ('Electronica', 'ELECTRONICA'),
         ('Ropa', 'ROPA'),
         ('Accesorios', 'ACCESORIOS'),
         ('Inmuebles', 'INMUEBLES'),
         ('Juguetes', 'JUGUETES'),
-        ('', '')
     }
 
     product_name = models.CharField(max_length=30)

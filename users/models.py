@@ -64,8 +64,16 @@ class Mayorista(models.Model):
 class Minorista(models.Model):
     user = models.OneToOneField(
         DeliverUser, on_delete=models.CASCADE, primary_key=True)
+    Tipo_Comercio = models.CharFiel(max_length=50, null=False)
+    CUIT = models.IntegerField(null=True)
+    registered_name = models.CharField(max_length=25, null=False)
 
 
 class Empleado(models.Model):
     user = models.OneToOneField(
         DeliverUser, on_delete=models.CASCADE, primary_key=True)
+    Sueldo = models.IntegerField(max_length=5)
+    Nombre = models.CharField(max_length=50)
+    Apellido = models.CharField(max_length=50)
+    Numero_de_legajo = models.ManyToManyField(Minorista, Mayorista)
+    Telefono = models.CharField(max_length=10)
