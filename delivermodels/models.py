@@ -9,14 +9,13 @@ class Post(models.Model):
     TYPES = {
         ('Verduras', 'VERDURAS'),
         ('Frutas', 'FRUTAS'),
-        ('Electrondomesticos', 'ELECTRODOMESTICOS'),
+        ('Electrodomesticos', 'ELECTRODOMESTICOS'),
         ('Bebidas', 'BEBIDAS'),
         ('Electronica', 'ELECTRONICA'),
         ('Ropa', 'ROPA'),
         ('Accesorios', 'ACCESORIOS'),
         ('Inmuebles', 'INMUEBLES'),
         ('Juguetes', 'JUGUETES'),
-        ('', '')
     }
 
     product_name = models.CharField(max_length=30)
@@ -40,4 +39,3 @@ class Question(models.Model):
 class Answer(models.Model):
     user = models.ForeignKey(DeliverUser, on_delete=models.CASCADE)
     question = models.OneToOneField(Question, on_delete=models.CASCADE)
-
